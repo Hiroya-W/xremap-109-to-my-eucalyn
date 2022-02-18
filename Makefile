@@ -6,6 +6,10 @@ TYPE_CHECKER := poetry run mypy
 PROJECT_DIR := myxremap
 CHECK_DIR := $(PROJECT_DIR) config.py
 
+.PHONY: generate
+generate:
+	poetry run xremap-python config.py > config.yml
+
 .PHONY: check
 check: format lint type
 
