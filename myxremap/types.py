@@ -1,9 +1,11 @@
 from typing import List, NamedTuple, NewType
 
+from myxremap.keys import MODIFIERS
+
 
 class Key(NamedTuple):
     key: str
-    modifiers: List[str] = ["None"]
+    modifiers: MODIFIERS = ["None"]
 
 
 class KeyMapping(NamedTuple):

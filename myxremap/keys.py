@@ -1,12 +1,15 @@
 from typing import List
+from typing_extensions import Literal, TypeAlias
 import itertools
 
-MODIFIERS: List[str] = ["Shift", "Alt", "Ctrl", "Super"]
+MODIFIER = Literal["None", "Shift", "Alt", "Ctrl", "Super"]
+MODIFIERS: TypeAlias = List[MODIFIER]
+MODS: MODIFIERS = ["Shift", "Alt", "Ctrl", "Super"]
 
-PREFIXES: List[List[str]] = [
+PREFIXES: List[MODIFIERS] = [
     ["None"],
-    *[[mod] for mod in MODIFIERS],
-    *[[*mod] for mod in list(itertools.combinations(MODIFIERS, 2))],
-    *[[*mod] for mod in list(itertools.combinations(MODIFIERS, 3))],
-    *[[*mod] for mod in list(itertools.combinations(MODIFIERS, 4))],
+    *[[mod] for mod in MODS],
+    *[[*mod] for mod in list(itertools.combinations(MODS, 2))],
+    *[[*mod] for mod in list(itertools.combinations(MODS, 3))],
+    *[[*mod] for mod in list(itertools.combinations(MODS, 4))],
 ]
