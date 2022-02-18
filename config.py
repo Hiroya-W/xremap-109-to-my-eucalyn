@@ -1,7 +1,7 @@
-from typing import Dict, List
+from typing import Dict
 from xremap.dsl import define_keymap  # noqa
-import itertools
 from myxremap.types import Key, KeyMapping, KeyMap
+from myxremap.keys import PREFIXES
 
 
 def key2str(key: Key) -> str:
@@ -10,16 +10,6 @@ def key2str(key: Key) -> str:
     else:
         return "-".join(key.modifiers) + "-" + key.key
 
-
-MODIFIERS: List[str] = ["Shift", "Alt", "Ctrl", "Super"]
-
-PREFIXES: List[List[str]] = [
-    ["None"],
-    *[[mod] for mod in MODIFIERS],
-    *[[*mod] for mod in list(itertools.combinations(MODIFIERS, 2))],
-    *[[*mod] for mod in list(itertools.combinations(MODIFIERS, 3))],
-    *[[*mod] for mod in list(itertools.combinations(MODIFIERS, 4))],
-]
 
 TO_EUCALYN = KeyMap(
     [
