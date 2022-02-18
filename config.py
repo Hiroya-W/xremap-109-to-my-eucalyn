@@ -1,5 +1,5 @@
 from typing import Dict
-from xremap.dsl import define_keymap  # noqa
+from xremap.dsl import define_keymap, define_modmap  # noqa
 from myxremap.types import Key, KeyMapping, KeyMap
 from myxremap.keys import PREFIXES
 from myxremap.converter import key2str
@@ -51,5 +51,7 @@ GLOBAL_KEYMAP: Dict[str, str] = {}
 
 for mapping in TO_EUCALYN_WITH_MODIFIERS:
     GLOBAL_KEYMAP[key2str(mapping.from_)] = key2str(mapping.to)
+
+define_modmap({"CapsLock": "Control_L"})
 
 define_keymap({}, GLOBAL_KEYMAP, "Global")

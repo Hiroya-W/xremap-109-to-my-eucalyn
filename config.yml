@@ -449,5 +449,8 @@ keymap:
     X: X
     Y: M
     Z: Z
-modmap: []
+modmap:
+- name: xremap-python
+  remap:
+    CapsLock: Control_L
 
