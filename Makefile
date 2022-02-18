@@ -3,6 +3,9 @@ LINTER := poetry run flake8
 IMPORT_SORTER := poetry run isort
 TYPE_CHECKER := poetry run mypy
 
+PROJECT_DIR := myxremap
+CHECK_DIR := $(PROJECT_DIR) config.py
+
 .PHONY: check
 check: format lint type
 
