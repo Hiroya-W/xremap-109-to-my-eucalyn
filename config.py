@@ -2,13 +2,7 @@ from typing import Dict
 from xremap.dsl import define_keymap  # noqa
 from myxremap.types import Key, KeyMapping, KeyMap
 from myxremap.keys import PREFIXES
-
-
-def key2str(key: Key) -> str:
-    if key.modifiers == ["None"]:
-        return key.key
-    else:
-        return "-".join(key.modifiers) + "-" + key.key
+from myxremap.converter import key2str
 
 
 TO_EUCALYN = KeyMap(
