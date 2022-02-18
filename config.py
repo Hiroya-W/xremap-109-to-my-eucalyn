@@ -1,19 +1,7 @@
-from typing import Dict, List, NamedTuple, NewType
+from typing import Dict, List
 from xremap.dsl import define_keymap  # noqa
 import itertools
-
-
-class Key(NamedTuple):
-    key: str
-    modifiers: List[str] = ["None"]
-
-
-class KeyMapping(NamedTuple):
-    from_: Key
-    to: Key
-
-
-KeyMap = NewType("KeyMap", List[KeyMapping])
+from myxremap.types import Key, KeyMapping, KeyMap
 
 
 def key2str(key: Key) -> str:
