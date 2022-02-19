@@ -5,7 +5,7 @@ from myxremap.keys import MODIFIERS
 
 class Key(NamedTuple):
     key: str
-    modifiers: MODIFIERS = ["None"]
+    modifiers: MODIFIERS = []
 
 
 class KeyMapping(NamedTuple):
