@@ -452,5 +452,6 @@ keymap:
 modmap:
 - name: xremap-python
   remap:
+    Alt_R: Super_L
     CapsLock: Control_L
 

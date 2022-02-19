@@ -52,6 +52,6 @@ GLOBAL_KEYMAP: Dict[str, str] = {}
 for mapping in TO_EUCALYN_WITH_MODIFIERS:
     GLOBAL_KEYMAP[key2str(mapping.from_)] = key2str(mapping.to)
 
-define_modmap({"CapsLock": "Control_L"})
+define_modmap({"CapsLock": "Control_L", "Alt_R": "Super_L"})
 
 define_keymap({}, GLOBAL_KEYMAP, "Global")
