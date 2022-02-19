@@ -1,9 +1,10 @@
 from typing import Dict
-from xremap.dsl import define_keymap, define_modmap  # noqa
-from myxremap.types import Key, KeyMapping, KeyMap
-from myxremap.keys import PREFIXES
-from myxremap.converter import key2str
 
+from xremap.dsl import define_keymap, define_modmap  # noqa
+
+from myxremap.converter import key2str
+from myxremap.keys import PREFIXES
+from myxremap.types import Key, KeyMap, KeyMapping
 
 TO_EUCALYN = KeyMap(
     [

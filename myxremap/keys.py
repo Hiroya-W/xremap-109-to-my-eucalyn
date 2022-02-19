@@ -1,6 +1,7 @@
-from typing import List
-from typing_extensions import Literal, TypeAlias
 import itertools
+from typing import List
+
+from typing_extensions import Literal, TypeAlias
 
 MODIFIER = Literal["Shift", "Alt", "Ctrl", "Super"]
 MODIFIERS: TypeAlias = List[MODIFIER]
