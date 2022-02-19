@@ -1,4 +1,4 @@
-# xremap-109-to-my-eucalyn
+# xremap-my-eucalyn
 
 Generate an xremap config with [xremap-python](https://github.com/xremap/xremap-python).
 
