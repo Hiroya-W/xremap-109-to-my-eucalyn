@@ -28,8 +28,7 @@ class Key:
         return "-".join(prefixes) + "-" + self.key
 
 
-MappingTo: TypeAlias = Dict[Modifier, Key]
-KeyMapping: TypeAlias = Dict[Key, MappingTo]
+KeyMapping: TypeAlias = Dict[Key, Key]
 
 
 class KeyMapBase(ABC):
@@ -63,20 +62,20 @@ class KeySwap(KeyMapBase):
         raise NotImplementedError
 
     def _create_mapping_to_all_modifiers(self, from_: Key, to: Key) -> None:
-        mapping_to = {}
         for prefix in ALL_PREFIXES:
-            mapping_to[prefix] = to
-        self.key_map[from_] = mapping_to
+            from_with_prefix = Key(from_.key, prefix)
+            to_with_prefix = Key(to.key, prefix)
+            self.key_map[from_with_prefix] = to_with_prefix
 
 
 class KeyMap(KeyMapBase):
     def __init__(self, key_map: KeyMapping = {}):
         self.key_map = key_map
 
-    def __getitem__(self, key: Key) -> MappingTo:
+    def __getitem__(self, key: Key) -> Key:
         return self.key_map[key]
 
-    def __setitem__(self, key: Key, value: MappingTo) -> None:
+    def __setitem__(self, key: Key, value: Key) -> None:
         self.key_map[key] = value
 
     def get_key_map(self) -> KeyMapping:
