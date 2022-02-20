@@ -44,6 +44,7 @@ class KeyMapBase(ABC):
 class KeySwap(KeyMapBase):
     def __init__(self, from_: Key, to: Key):
         self.key_map: KeyMapping = {}
+        self._create_mapping_to_all_modifiers(from_, to)
 
     def get_key_map(self) -> KeyMapping:
         return self.key_map
@@ -51,7 +52,7 @@ class KeySwap(KeyMapBase):
     def dump(self) -> Dict[str, Any]:
         raise NotImplementedError
 
-    def _create_mapping_to_all_modifiers(self, to: Key, from_: Key) -> None:
+    def _create_mapping_to_all_modifiers(self, from_: Key, to: Key) -> None:
         self.key_map[from_] = {
             Modifier.NONE: to,
             Modifier.CTRL: Key(to.key, Modifier.CTRL),
