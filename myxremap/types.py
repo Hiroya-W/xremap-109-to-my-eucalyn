@@ -2,7 +2,7 @@ from typing import Any, Dict, List
 from typing_extensions import TypeAlias
 from abc import ABC, abstractmethod
 
-from myxremap.new_keys import Modifier, ALL_PREFIXES
+from myxremap.keys import Modifier, ALL_PREFIXES
 from myxremap.exceptions import InvalidKeySwapArgumentException
 
 

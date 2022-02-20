@@ -1,4 +1,4 @@
-from myxremap.new_types import Key
+from myxremap.types import Key
 
 
 class XremapException(Exception):
