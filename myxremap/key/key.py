@@ -11,13 +11,13 @@ class Key:
             return self.key
 
         prefixes = []
-        if self.modifiers == Modifier.CTRL:
+        if self.modifiers & Modifier.CTRL:
             prefixes.append("CTRL")
-        if self.modifiers == Modifier.ALT:
+        if self.modifiers & Modifier.ALT:
             prefixes.append("ALT")
-        if self.modifiers == Modifier.SHIFT:
+        if self.modifiers & Modifier.SHIFT:
             prefixes.append("SHIFT")
-        if self.modifiers == Modifier.SUPER:
+        if self.modifiers & Modifier.SUPER:
             prefixes.append("SUPER")
 
         return "-".join(prefixes) + "-" + self.key
