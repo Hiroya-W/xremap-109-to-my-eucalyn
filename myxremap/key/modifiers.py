@@ -1,5 +1,5 @@
-from enum import Flag, auto
 import itertools
+from enum import Flag, auto
 from typing import List
 
 

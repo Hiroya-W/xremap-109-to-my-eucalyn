@@ -1,9 +1,10 @@
-from typing import Any, Dict, List
-from typing_extensions import TypeAlias
 from abc import ABC, abstractmethod
+from typing import Any, Dict, List
 
-from myxremap.key import Modifier, ALL_PREFIXES, Key
+from typing_extensions import TypeAlias
+
 from myxremap.common.exceptions import InvalidKeySwapArgumentException
+from myxremap.key import ALL_PREFIXES, Key, Modifier
 
 KeyMapping: TypeAlias = Dict[Key, Key]
 

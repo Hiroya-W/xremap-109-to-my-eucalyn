@@ -1,1 +1,1 @@
-from .keymap import KeyMapBase, KeyMap, KeySwap
+from .keymap import KeyMap, KeyMapBase, KeySwap

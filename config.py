@@ -1,6 +1,6 @@
 from xremap.dsl import define_keymap, define_modmap
 
-from myxremap.key import Modifier, Key
+from myxremap.key import Key, Modifier
 from myxremap.keymap import KeyMap, KeySwap
 
 key_map = KeyMap()
