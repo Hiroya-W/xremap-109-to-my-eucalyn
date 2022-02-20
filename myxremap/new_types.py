@@ -2,7 +2,8 @@ from typing import Any, Dict
 from typing_extensions import TypeAlias
 from abc import ABC, abstractmethod
 
-from myxremap.new_keys import Modifier
+from myxremap.new_keys import Modifier, ALL_PREFIXES
+from myxremap.exceptions import InvalidKeySwapArgumentException
 
 
 class Key:
@@ -43,6 +44,15 @@ class KeyMapBase(ABC):
 
 class KeySwap(KeyMapBase):
     def __init__(self, from_: Key, to: Key):
+        if from_.modifiers != Modifier.NONE:
+            raise InvalidKeySwapArgumentException(
+                from_, "The key of the swap source must be Modifier.NONE."
+            )
+        if to.modifiers != Modifier.NONE:
+            raise InvalidKeySwapArgumentException(
+                to, "The key of the swap target must be Modifier.NONE."
+            )
+
         self.key_map: KeyMapping = {}
         self._create_mapping_to_all_modifiers(from_, to)
 
@@ -53,13 +63,10 @@ class KeySwap(KeyMapBase):
         raise NotImplementedError
 
     def _create_mapping_to_all_modifiers(self, from_: Key, to: Key) -> None:
-        self.key_map[from_] = {
-            Modifier.NONE: to,
-            Modifier.CTRL: Key(to.key, Modifier.CTRL),
-            Modifier.ALT: Key(to.key, Modifier.ALT),
-            Modifier.SHIFT: Key(to.key, Modifier.SHIFT),
-            Modifier.SUPER: Key(to.key, Modifier.SUPER),
-        }
+        mapping_to = {}
+        for prefix in ALL_PREFIXES:
+            mapping_to[prefix] = to
+        self.key_map[from_] = mapping_to
 
 
 class KeyMap(KeyMapBase):
