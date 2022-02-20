@@ -1,4 +1,4 @@
-from typing import Any, Dict, Iterator
+from typing import Any, Dict
 from typing_extensions import TypeAlias
 from abc import ABC, abstractmethod
 
@@ -70,18 +70,6 @@ class KeyMap(KeyMapBase):
 
     def __setitem__(self, key: Key, value: MappingTo) -> None:
         self.key_map[key] = value
-
-    def __iter__(self) -> Iterator[Key]:
-        return iter(self.key_map)
-
-    def __len__(self) -> int:
-        return len(self.key_map)
-
-    def __str__(self) -> str:
-        return str(self.key_map)
-
-    def __repr__(self) -> str:
-        return repr(self.key_map)
 
     def get_key_map(self) -> KeyMapping:
         return self.key_map
