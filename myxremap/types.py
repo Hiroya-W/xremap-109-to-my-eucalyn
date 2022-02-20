@@ -32,9 +32,11 @@ KeyMapping: TypeAlias = Dict[Key, Key]
 
 
 class KeyMapBase(ABC):
-    @abstractmethod
+    def __init__(self) -> None:
+        self.key_map: KeyMapping = {}
+
     def get_key_map(self) -> KeyMapping:
-        pass
+        return self.key_map
 
     @abstractmethod
     def dump(self) -> Dict[str, Any]:
@@ -43,6 +45,7 @@ class KeyMapBase(ABC):
 
 class KeySwap(KeyMapBase):
     def __init__(self, from_: Key, to: Key):
+        super().__init__()
         if from_.modifiers != Modifier.NONE:
             raise InvalidKeySwapArgumentException(
                 from_, "The key of the swap source must be Modifier.NONE."
@@ -52,11 +55,7 @@ class KeySwap(KeyMapBase):
                 to, "The key of the swap target must be Modifier.NONE."
             )
 
-        self.key_map: KeyMapping = {}
         self._create_mapping_to_all_modifiers(from_, to)
-
-    def get_key_map(self) -> KeyMapping:
-        return self.key_map
 
     def dump(self) -> Dict[str, Any]:
         res: Dict[str, str] = {}
@@ -73,6 +72,7 @@ class KeySwap(KeyMapBase):
 
 class KeyMap(KeyMapBase):
     def __init__(self, key_map: KeyMapping = {}):
+        super().__init__()
         self.key_map = key_map
 
     def __getitem__(self, key: Key) -> Key:
@@ -80,9 +80,6 @@ class KeyMap(KeyMapBase):
 
     def __setitem__(self, key: Key, value: Key) -> None:
         self.key_map[key] = value
-
-    def get_key_map(self) -> KeyMapping:
-        return self.key_map
 
     def dump(self) -> Dict[str, Any]:
         res: Dict[str, str] = {}
