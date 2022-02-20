@@ -3,21 +3,21 @@ keymap:
   remap:
     A: A
     Alt-A: Alt-A
-    Alt-B: Alt-F
+    Alt-B: KPSlash
     Alt-C: Alt-C
     Alt-Comma: Down
     Alt-D: Alt-E
     Alt-Dot: Right
     Alt-E: Alt-Comma
     Alt-F: Alt-I
-    Alt-G: Alt-U
-    Alt-H: Alt-G
+    Alt-G: KPAsterisk
+    Alt-H: KPPlus
     Alt-I: Alt-D
-    Alt-J: Alt-T
+    Alt-J: BackSpace
     Alt-K: Up
-    Alt-L: Alt-S
+    Alt-L: Delete
     Alt-M: Left
-    Alt-N: Alt-B
+    Alt-N: KPMinus
     Alt-O: Alt-Y
     Alt-P: Alt-P
     Alt-Q: Alt-Q
@@ -368,6 +368,7 @@ keymap:
     Shift-E: Shift-Comma
     Shift-F: Shift-I
     Shift-G: Shift-U
+    Shift-Grave: Alt-Grave
     Shift-H: Shift-G
     Shift-I: Shift-D
     Shift-J: Shift-T

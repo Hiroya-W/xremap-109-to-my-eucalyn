@@ -43,6 +43,15 @@ key_map[Key("Comma", Modifier.ALT)] = Key("Down")
 key_map[Key("M", Modifier.ALT)] = Key("Left")
 key_map[Key("Dot", Modifier.ALT)] = Key("Right")
 
+key_map[Key("J", Modifier.ALT)] = Key("BackSpace")
+key_map[Key("L", Modifier.ALT)] = Key("Delete")
+
+key_map[Key("G", Modifier.ALT)] = Key("KPAsterisk")
+key_map[Key("H", Modifier.ALT)] = Key("KPPlus")
+key_map[Key("B", Modifier.ALT)] = Key("KPSlash")
+key_map[Key("N", Modifier.ALT)] = Key("KPMinus")
+
+key_map[Key("Grave", Modifier.SHIFT)] = Key("Grave", Modifier.ALT)
 
 define_modmap({"CapsLock": "Control_L", "Alt_R": "Super_L"})
 define_keymap({}, key_map.dump(), "Global")
