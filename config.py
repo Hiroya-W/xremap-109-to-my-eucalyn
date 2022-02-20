@@ -1,58 +1,48 @@
-from typing import Dict
+from xremap.dsl import define_keymap, define_modmap
 
-from xremap.dsl import define_keymap, define_modmap  # noqa
+from myxremap.key import Modifier, Key
+from myxremap.keymap import KeyMap, KeySwap
 
-from myxremap.converter import key2str
-from myxremap.keys import PREFIXES
-from myxremap.types import Key, KeyMap, KeyMapping
+key_map = KeyMap()
 
-TO_EUCALYN = KeyMap(
+key_map.extend(
     [
-        KeyMapping(Key("Q"), Key("Q")),
-        KeyMapping(Key("E"), Key("Comma")),
-        KeyMapping(Key("R"), Key("Dot")),
-        KeyMapping(Key("T"), Key("Semicolon")),
-        KeyMapping(Key("Y"), Key("M")),
-        KeyMapping(Key("U"), Key("R")),
-        KeyMapping(Key("I"), Key("D")),
-        KeyMapping(Key("O"), Key("Y")),
-        KeyMapping(Key("P"), Key("P")),
-        KeyMapping(Key("A"), Key("A")),
-        KeyMapping(Key("S"), Key("O")),
-        KeyMapping(Key("D"), Key("E")),
-        KeyMapping(Key("F"), Key("I")),
-        KeyMapping(Key("G"), Key("U")),
-        KeyMapping(Key("H"), Key("G")),
-        KeyMapping(Key("J"), Key("T")),
-        KeyMapping(Key("K"), Key("K")),
-        KeyMapping(Key("L"), Key("S")),
-        KeyMapping(Key("Semicolon"), Key("N")),
-        KeyMapping(Key("Z"), Key("Z")),
-        KeyMapping(Key("X"), Key("X")),
-        KeyMapping(Key("C"), Key("C")),
-        KeyMapping(Key("V"), Key("V")),
-        KeyMapping(Key("B"), Key("F")),
-        KeyMapping(Key("N"), Key("B")),
-        KeyMapping(Key("M"), Key("H")),
-        KeyMapping(Key("Comma"), Key("J")),
-        KeyMapping(Key("Dot"), Key("L")),
+        KeySwap(Key("Q"), Key("Q")),
+        KeySwap(Key("E"), Key("Comma")),
+        KeySwap(Key("R"), Key("Dot")),
+        KeySwap(Key("T"), Key("Semicolon")),
+        KeySwap(Key("Y"), Key("M")),
+        KeySwap(Key("U"), Key("R")),
+        KeySwap(Key("I"), Key("D")),
+        KeySwap(Key("O"), Key("Y")),
+        KeySwap(Key("P"), Key("P")),
+        KeySwap(Key("A"), Key("A")),
+        KeySwap(Key("S"), Key("O")),
+        KeySwap(Key("D"), Key("E")),
+        KeySwap(Key("F"), Key("I")),
+        KeySwap(Key("G"), Key("U")),
+        KeySwap(Key("H"), Key("G")),
+        KeySwap(Key("J"), Key("T")),
+        KeySwap(Key("K"), Key("K")),
+        KeySwap(Key("L"), Key("S")),
+        KeySwap(Key("Semicolon"), Key("N")),
+        KeySwap(Key("Z"), Key("Z")),
+        KeySwap(Key("X"), Key("X")),
+        KeySwap(Key("C"), Key("C")),
+        KeySwap(Key("V"), Key("V")),
+        KeySwap(Key("B"), Key("F")),
+        KeySwap(Key("N"), Key("B")),
+        KeySwap(Key("M"), Key("H")),
+        KeySwap(Key("Comma"), Key("J")),
+        KeySwap(Key("Dot"), Key("L")),
     ]
 )
 
-TO_EUCALYN_WITH_MODIFIERS = KeyMap([])
+key_map[Key("K", Modifier.ALT)] = Key("Up")
+key_map[Key("Comma", Modifier.ALT)] = Key("Down")
+key_map[Key("M", Modifier.ALT)] = Key("Left")
+key_map[Key("Dot", Modifier.ALT)] = Key("Right")
 
-for mapping in TO_EUCALYN:
-    for prefix in PREFIXES:
-        from_ = Key(mapping.from_.key, prefix)
-        to = Key(mapping.to.key, prefix)
-        TO_EUCALYN_WITH_MODIFIERS.append(KeyMapping(from_, to))
-
-
-GLOBAL_KEYMAP: Dict[str, str] = {}
-
-for mapping in TO_EUCALYN_WITH_MODIFIERS:
-    GLOBAL_KEYMAP[key2str(mapping.from_)] = key2str(mapping.to)
 
 define_modmap({"CapsLock": "Control_L", "Alt_R": "Super_L"})
-
-define_keymap({}, GLOBAL_KEYMAP, "Global")
+define_keymap({}, key_map.dump(), "Global")
