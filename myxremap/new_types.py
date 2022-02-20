@@ -1,4 +1,6 @@
-from typing import Dict, NewType
+from typing import Any, Dict, Iterator
+from typing_extensions import TypeAlias
+from abc import ABC, abstractmethod
 
 from myxremap.new_keys import Modifier
 
@@ -25,4 +27,67 @@ class Key:
         return "-".join(prefixes) + "-" + self.key
 
 
-KeyMap = NewType("KeyMap", Dict[Key, Dict[Modifier, Key]])
+MappingTo: TypeAlias = Dict[Modifier, Key]
+KeyMapping: TypeAlias = Dict[Key, MappingTo]
+
+
+class KeyMapBase(ABC):
+    @abstractmethod
+    def get_key_map(self) -> KeyMapping:
+        pass
+
+    @abstractmethod
+    def dump(self) -> Dict[str, Any]:
+        raise NotImplementedError
+
+
+class KeySwap(KeyMapBase):
+    def __init__(self, from_: Key, to: Key):
+        self.key_map: KeyMapping = {}
+
+    def get_key_map(self) -> KeyMapping:
+        return self.key_map
+
+    def dump(self) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def _create_mapping_to_all_modifiers(self, to: Key, from_: Key) -> None:
+        self.key_map[from_] = {
+            Modifier.NONE: to,
+            Modifier.CTRL: Key(to.key, Modifier.CTRL),
+            Modifier.ALT: Key(to.key, Modifier.ALT),
+            Modifier.SHIFT: Key(to.key, Modifier.SHIFT),
+            Modifier.SUPER: Key(to.key, Modifier.SUPER),
+        }
+
+
+class KeyMap(KeyMapBase):
+    def __init__(self, key_map: KeyMapping = {}):
+        self.key_map = key_map
+
+    def __getitem__(self, key: Key) -> MappingTo:
+        return self.key_map[key]
+
+    def __setitem__(self, key: Key, value: MappingTo) -> None:
+        self.key_map[key] = value
+
+    def __iter__(self) -> Iterator[Key]:
+        return iter(self.key_map)
+
+    def __len__(self) -> int:
+        return len(self.key_map)
+
+    def __str__(self) -> str:
+        return str(self.key_map)
+
+    def __repr__(self) -> str:
+        return repr(self.key_map)
+
+    def get_key_map(self) -> KeyMapping:
+        return self.key_map
+
+    def dump(self) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def extend(self, key_map: KeyMapBase) -> None:
+        self.key_map.update(key_map.get_key_map())
