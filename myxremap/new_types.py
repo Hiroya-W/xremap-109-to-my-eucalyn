@@ -59,7 +59,10 @@ class KeySwap(KeyMapBase):
         return self.key_map
 
     def dump(self) -> Dict[str, Any]:
-        raise NotImplementedError
+        res: Dict[str, str] = {}
+        for from_, to in self.key_map.items():
+            res[str(from_)] = str(to)
+        return res
 
     def _create_mapping_to_all_modifiers(self, from_: Key, to: Key) -> None:
         for prefix in ALL_PREFIXES:
@@ -82,7 +85,10 @@ class KeyMap(KeyMapBase):
         return self.key_map
 
     def dump(self) -> Dict[str, Any]:
-        raise NotImplementedError
+        res: Dict[str, str] = {}
+        for from_, to in self.key_map.items():
+            res[str(from_)] = str(to)
+        return res
 
     def extend(self, key_maps: List[KeyMapBase]) -> None:
         for key_map in key_maps:
