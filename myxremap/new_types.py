@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 from typing_extensions import TypeAlias
 from abc import ABC, abstractmethod
 
@@ -84,5 +84,6 @@ class KeyMap(KeyMapBase):
     def dump(self) -> Dict[str, Any]:
         raise NotImplementedError
 
-    def extend(self, key_map: KeyMapBase) -> None:
-        self.key_map.update(key_map.get_key_map())
+    def extend(self, key_maps: List[KeyMapBase]) -> None:
+        for key_map in key_maps:
+            self.key_map.update(key_map.get_key_map())
