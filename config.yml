@@ -368,7 +368,7 @@ keymap:
     Shift-E: Shift-Comma
     Shift-F: Shift-I
     Shift-G: Shift-U
-    Shift-Grave: Alt-Grave
+    Shift-Grave: KatakanaHiragana
     Shift-H: Shift-G
     Shift-I: Shift-D
     Shift-J: Shift-T
