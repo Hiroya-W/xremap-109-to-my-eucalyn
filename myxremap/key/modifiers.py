@@ -11,13 +11,13 @@ class Modifier(Flag):
     SUPER = auto()
 
 
-_MODIFIER_LIST = list(Modifier)[1:]
+__MODIFIER_LIST = list(Modifier)[1:]
 
-ALL_PREFIXES: List[Modifier] = [Modifier.NONE]
+ALL_PREFIXES: List[Modifier] = []
 
-for n in range(1, len(_MODIFIER_LIST) + 1):
-    for combination in itertools.combinations(_MODIFIER_LIST, n):
-        prefix = Modifier.NONE
-        for mod in combination:
-            prefix |= mod
-        ALL_PREFIXES.append(prefix)
+for bits in itertools.product([0, 1], repeat=len(__MODIFIER_LIST)):
+    prefix = Modifier.NONE
+    for modifier, bit in zip(__MODIFIER_LIST, bits):
+        if bit == 1:
+            prefix |= modifier
+    ALL_PREFIXES.append(prefix)
